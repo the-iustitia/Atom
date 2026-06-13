@@ -1,4 +1,3 @@
-#!/usr/bin/env ruby
 require "io/console"
 
 class MiniVim
@@ -18,7 +17,6 @@ class MiniVim
     @undo_stack = []
   end
 
-  # ================= MAIN LOOP =================
   def run
     system("clear")
     hide_cursor
@@ -32,7 +30,6 @@ class MiniVim
     system("clear")
   end
 
-  # ================= RENDER =================
   def render
     system("clear")
 
@@ -58,7 +55,6 @@ class MiniVim
     print "\e[0m"
   end
 
-  # ================= INPUT =================
   def input
     ch = STDIN.getch
 
@@ -69,7 +65,6 @@ class MiniVim
     end
   end
 
-  # ================= NORMAL MODE =================
   def handle_normal(ch)
     case ch
     when "h" then @cx = [@cx - 1, 0].max
@@ -104,7 +99,7 @@ class MiniVim
       cmd = STDIN.gets.chomp
       execute(cmd)
 
-    when "\u0015" # Ctrl+U undo
+    when "\u0015"
       undo
     end
 
@@ -112,7 +107,6 @@ class MiniVim
     adjust_viewport
   end
 
-  # ================= INSERT MODE =================
   def handle_insert(ch)
     if ch == "\e"
       @mode = :normal
@@ -132,7 +126,6 @@ class MiniVim
     @cx += 1
   end
 
-  # ================= EDIT OPERATIONS =================
   def delete_char
     line = @lines[@cy]
     line[@cx] = "" if @cx < line.size
@@ -167,7 +160,6 @@ class MiniVim
     @cx = 0
   end
 
-  # ================= SEARCH =================
   def search(query)
     idx = @lines.index { |l| l.include?(query) }
     return unless idx
@@ -177,7 +169,6 @@ class MiniVim
     adjust_viewport
   end
 
-  # ================= UNDO =================
   def save_undo
     @undo_stack << Marshal.dump([@lines, @cx, @cy])
     @undo_stack.shift if @undo_stack.size > 50
@@ -189,7 +180,6 @@ class MiniVim
     @lines, @cx, @cy = Marshal.load(@undo_stack.pop)
   end
 
-  # ================= MOVEMENT =================
   def move_up
     @cy -= 1
   end
@@ -203,7 +193,6 @@ class MiniVim
     @cx = [[@cx, 0].max, @lines[@cy].size].min
   end
 
-  # ================= VIEWPORT =================
   def adjust_viewport
     if @cy < @row_offset
       @row_offset = @cy
@@ -212,7 +201,6 @@ class MiniVim
     end
   end
 
-  # ================= COMMANDS =================
   def execute(cmd)
     case cmd
     when "q"
@@ -225,7 +213,6 @@ class MiniVim
     end
   end
 
-  # ================= CURSOR =================
   def move_cursor_screen
     screen_y = @cy - @row_offset + 1
     print "\e[#{screen_y};#{@cx + 5}H"
