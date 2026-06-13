@@ -1,53 +1,176 @@
-# Atom Text Editor Usage Documentation
+# Atom
 
-This text editor is developed based on the concepts and functionalities of Vim, known for its efficiency and powerful text editing capabilities.
+A lightweight terminal text editor written in Ruby.
 
-## Installation and Launch
+Atom is a Vim-inspired terminal editor built for learning, experimentation, and understanding how text editors work internally. It provides a minimal yet functional editing environment directly inside the terminal.
 
-1. **Download and Compile the Source Code**:
-   - Ensure that all necessary libraries and dependencies are installed.
-   - Compile the source code using a C++ compiler.
+---
 
-2. **Starting the Editor**:
-   - Launch the compiled application.
-   - Enter the filename you wish to open or create. If the file exists, its content will be loaded into the editor.
+## Features
 
-## Modes of Operation
+* Terminal-based interface
+* Normal and Insert modes
+* File opening and saving
+* Cursor navigation
+* Viewport scrolling
+* Search functionality
+* Undo support
+* Copy and paste lines
+* Line numbers
+* Cross-platform support
 
-The editor supports three modes of operation:
+---
 
-- **Normal Mode**: The primary mode for navigating through text and executing commands.
-- **Insert Mode**: Mode for entering and editing text.
-- **Command Mode**: Mode for executing commands such as saving files, exiting the editor, and other operations.
-
-## Key Commands
+## Key Bindings
 
 ### Navigation
 
-- `h`, `j`, `k`, `l`: Move the cursor left, down, up, and right respectively.
-- `w`: Move to the beginning of the next word.
-- `b`: Move to the beginning of the previous word.
+| Key | Action            |
+| --- | ----------------- |
+| h   | Move cursor left  |
+| j   | Move cursor down  |
+| k   | Move cursor up    |
+| l   | Move cursor right |
 
 ### Editing
 
-- `i`: Enter insert mode (for typing and editing text).
-- `dd`: Delete the current line.
-- `dw`: Delete from the current position to the beginning of the next word.
-- `yy`: Yank (copy) the current line.
-- `p`: Paste the contents of the buffer after the current line.
-- `P`: Paste the contents of the buffer before the current line.
+| Key | Action              |
+| --- | ------------------- |
+| i   | Enter Insert Mode   |
+| x   | Delete character    |
+| dd  | Delete current line |
+| yy  | Copy current line   |
+| p   | Paste copied line   |
 
-### Undo and Redo
+### Search
 
-- `u`: Undo the last action.
-- `Ctrl+R`: Redo the last undone action.
+| Command | Action          |
+| ------- | --------------- |
+| /text   | Search for text |
 
-### Saving and Exiting
+### Undo
 
-- `:w`: Save changes to the file.
-- `:q`: Exit the editor (if there are unsaved changes, the editor will prompt to save).
+| Key      | Action           |
+| -------- | ---------------- |
+| Ctrl + U | Undo last action |
 
-### Searching and Replacing
+### File Operations
 
-- `/`: Start a search. Enter the search string and press Enter to find occurrences in the text.
-- `:s/old/new/`: Replace all occurrences of `old` with `new` in the current buffer.
+| Command | Action        |
+| ------- | ------------- |
+| :w      | Save file     |
+| :q      | Quit editor   |
+| :wq     | Save and quit |
+
+---
+
+## Requirements
+
+* Ruby 3.0+
+* ANSI-compatible terminal
+
+### Supported Platforms
+
+* Linux
+* Windows (Windows Terminal recommended)
+* macOS
+
+---
+
+## Installation
+
+Clone the repository:
+
+```bash
+git clone https://github.com/your-username/atom.git
+cd atom
+```
+
+Install dependencies (if any):
+
+```bash
+bundle install
+```
+
+---
+
+## Usage
+
+Open an existing file:
+
+```bash
+ruby atom.rb README.md
+```
+
+Create a new file:
+
+```bash
+ruby atom.rb notes.txt
+```
+
+---
+
+## Project Structure
+
+```text
+atom/
+│
+├── atom.rb
+├── README.md
+├── LICENSE
+│
+├── core/
+│   ├── editor.rb
+│   ├── buffer.rb
+│   ├── renderer.rb
+│   ├── input.rb
+│   └── commands.rb
+│
+└── docs/
+```
+
+---
+
+## Roadmap
+
+### v0.4
+
+* Redo support
+* Arrow keys
+* Backspace improvements
+* Better terminal rendering
+
+### v0.5
+
+* Syntax highlighting
+* Multiple buffers
+* Better search engine
+* Configuration file support
+
+### v1.0
+
+* Plugin system
+* Window splitting
+* Themes
+* Vim-style command extensions
+
+---
+
+## Philosophy
+
+Atom aims to stay:
+
+* Lightweight
+* Fast
+* Hackable
+* Educational
+
+The codebase is intentionally kept simple so developers can explore and understand how terminal editors work under the hood.
+
+---
+
+## License
+
+MIT License
+
+Feel free to use, modify, and distribute this project.
